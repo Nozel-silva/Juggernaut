@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30-Day Muscle Gain Plan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #1e3a8a;
+    }
+    .section {
+      background: white;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .day-title {
+      color: #2563eb;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    #start-btn {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #routine-display {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>30-Day Muscle Gain Meal & Workout Plan</h1>
+  <button id="start-btn">Start Daily Routine</button>
+  <div id="routine-display" class="section"></div>
+
+  <script>
+    const routines = [
+      {
+        title: "Day 1 – Chest & Triceps",
+        meals: [
+          "Breakfast: 4 eggs, 2 toasts, oats with banana & peanut butter",
+          "Snack: Greek yogurt + almonds + whey protein",
+          "Lunch: Chicken breast + brown rice + broccoli",
+          "Snack: Tuna sandwich + fruit juice",
+          "Dinner: Grilled salmon + sweet potatoes + spinach",
+          "Night Snack: Casein shake + cottage cheese + apple"
+        ],
+        workout: [
+          "Bench Press – 4×8",
+          "Incline Dumbbell Press – 3×10",
+          "Cable Fly – 3×12",
+          "Tricep Pushdown – 3×10",
+          "Dips – 2×Max"
+        ],
+        image: "https://www.muscleandstrength.com/sites/default/files/bench-press.jpg"
+      },
+      {
+        title: "Day 2 – Back & Biceps",
+        meals: [
+          "Breakfast: Omelette, oats & berries",
+          "Snack: Protein shake + banana",
+          "Lunch: Grilled fish + quinoa + green beans",
+          "Snack: Boiled eggs + fruit",
+          "Dinner: Steak + mashed potatoes + kale",
+          "Night Snack: Cottage cheese + handful of nuts"
+        ],
+        workout: [
+          "Deadlift – 4×6",
+          "Pull-ups – 3×Max",
+          "Barbell Rows – 4×8",
+          "Dumbbell Curls – 3×10",
+          "Hammer Curls – 3×12"
+        ],
+        image: "https://www.bodybuilding.com/images/2020/august/back-workout-for-thickness-header-960x540.jpg"
+      }
+      // Add more days as needed up to Day 30
+    ];
+
+    function getDayIndex() {
+      const storedStart = localStorage.getItem('startDate');
+      const today = new Date();
+      if (!storedStart) return 0;
+      const startDate = new Date(storedStart);
+      const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+      return Math.min(diff, routines.length - 1);
+    }
+
+    function showRoutine(day) {
+      const routine = routines[day];
+      if (!routine) return;
+      const display = document.getElementById("routine-display");
+      display.innerHTML = `
+        <h2>${routine.title}</h2>
+        <h3>Meals:</h3>
+        <ul>${routine.meals.map(m => `<li>${m}</li>`).join('')}</ul>
+        <h3>Workout:</h3>
+        <ul>${routine.workout.map(w => `<li>${w}</li>`).join('')}</ul>
+        <img src="${routine.image}" alt="Workout image">
+      `;
+      display.style.display = 'block';
+    }
+
+    document.getElementById("start-btn").addEventListener("click", () => {
+      if (!localStorage.getItem("startDate")) {
+        localStorage.setItem("startDate", new Date().toISOString());
+      }
+      const day = getDayIndex();
+      showRoutine(day);
+    });
+  </script>
+</body>
+</html>
