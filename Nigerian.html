@@ -49,12 +49,19 @@
     #routine-display {
       display: none;
     }
+    #timer {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #c0392b;
+    }
   </style>
 </head>
 <body>
   <h1>30-Day Nigerian Meal & Workout Plan</h1>
   <button id="start-btn">Start Daily Routine</button>
   <div id="routine-display" class="section"></div>
+  <div id="timer"></div>
 
   <script>
     const nigerianMeals = [
@@ -69,77 +76,37 @@
     const workouts = [
       {
         title: "Day 1 – Agility & Push Strength",
-        workout: [
-          "Push-ups – 4×20",
-          "Bench Dips – 3×15",
-          "Keg/Water Gallon Press – 4×12",
-          "Compound Floor Press (using bag of rice or books) – 3×10",
-          "Suya Squat Hold (isometric) – 3×30s"
-        ],
+        workout: ["Push-ups – 4×20","Bench Dips – 3×15","Keg/Water Gallon Press – 4×12","Compound Floor Press (using bag of rice or books) – 3×10","Suya Squat Hold (isometric) – 3×30s"],
         image: "https://www.muscleandfitness.com/wp-content/uploads/2019/07/1109-chest-dips.jpg"
       },
       {
         title: "Day 2 – Bodyweight Back & Core",
-        workout: [
-          "Pull-ups on door frame or tree – 3×Max",
-          "Inverted Rows using table – 3×12",
-          "Water Bottle Russian Twists – 3×30",
-          "Bicycle Crunches – 3×40",
-          "Chair Plank Hold – 3×45s"
-        ],
+        workout: ["Pull-ups on door frame or tree – 3×Max","Inverted Rows using table – 3×12","Water Bottle Russian Twists – 3×30","Bicycle Crunches – 3×40","Chair Plank Hold – 3×45s"],
         image: "https://www.spotebi.com/wp-content/uploads/2015/11/bicycle-crunches-exercise-illustration-spotebi.gif"
       },
       {
         title: "Day 3 – Market Run & Legs",
-        workout: [
-          "Morning Jog (2km or local market lap)",
-          "Step-ups on bench or stair – 3×20",
-          "Bucket Lunges – 3×12 each leg",
-          "Calf Raises with Rice Bag – 3×25",
-          "Wall Sit – 3×45s"
-        ],
+        workout: ["Morning Jog (2km or local market lap)","Step-ups on bench or stair – 3×20","Bucket Lunges – 3×12 each leg","Calf Raises with Rice Bag – 3×25","Wall Sit – 3×45s"],
         image: "https://www.verywellfit.com/thmb/FVbCSh4ScuVJK_z2LAGrM7PN-2Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/wall-sit-57a56ad45f9b589aa9ac71c5.jpg"
       },
       {
         title: "Day 4 – Yoruba Flow Mobility",
-        workout: [
-          "Palm-tap squats – 3×20",
-          "Shoki Dance Squats – 3×30s",
-          "Side Lunges with Water Gallons – 3×12",
-          "Owambe Shuffle & Twist – 2×1min",
-          "Hamstring Stretch – 3×30s each leg"
-        ],
+        workout: ["Palm-tap squats – 3×20","Shoki Dance Squats – 3×30s","Side Lunges with Water Gallons – 3×12","Owambe Shuffle & Twist – 2×1min","Hamstring Stretch – 3×30s each leg"],
         image: "https://i.ytimg.com/vi/vZjQ8M2kBlM/maxresdefault.jpg"
       },
       {
         title: "Day 5 – Full Body Street Session",
-        workout: [
-          "Burpees – 4×10",
-          "Hill Sprint (or stairs) – 6 sets",
-          "Tire Jump or Skip – 3×20",
-          "Push-up Clap Challenge – 3×Max",
-          "Skipping Rope – 5 mins"
-        ],
+        workout: ["Burpees – 4×10","Hill Sprint (or stairs) – 6 sets","Tire Jump or Skip – 3×20","Push-up Clap Challenge – 3×Max","Skipping Rope – 5 mins"],
         image: "https://i.ytimg.com/vi/1xXWZajJ4rM/maxresdefault.jpg"
       },
       {
         title: "Day 6 – Dance + Abs",
-        workout: [
-          "Zanku Bounce Drill – 3×1min",
-          "Afrobeats Squat Jumps – 3×15",
-          "Sit-ups with Bottle Press – 3×20",
-          "Leg Raises – 3×15",
-          "Plank to Push-up – 3×12"
-        ],
+        workout: ["Zanku Bounce Drill – 3×1min","Afrobeats Squat Jumps – 3×15","Sit-ups with Bottle Press – 3×20","Leg Raises – 3×15","Plank to Push-up – 3×12"],
         image: "https://i.pinimg.com/originals/76/b3/48/76b3483db7dcd60e7fa471e3e9bdfbff.jpg"
       },
       {
         title: "Day 7 – Active Lagos Cool Down",
-        workout: [
-          "Stretch + Breathe – 10 mins",
-          "Walk or Dance Freestyle – 20 mins",
-          "Light jogging or jumping jacks – 3×1min"
-        ],
+        workout: ["Stretch + Breathe – 10 mins","Walk or Dance Freestyle – 20 mins","Light jogging or jumping jacks – 3×1min"],
         image: "https://thumbs.dreamstime.com/b/group-african-people-stretching-sportswear-outdoor-afro-fitness-women-men-park-healthy-lifestyle-202723657.jpg"
       }
     ];
@@ -178,12 +145,38 @@
       display.style.display = 'block';
     }
 
+    function showTimer() {
+      const storedStart = localStorage.getItem("startDate");
+      if (!storedStart) return;
+      const startDate = new Date(storedStart);
+      const nextDay = new Date(startDate.getTime() + (getDayIndex() + 1) * 24 * 60 * 60 * 1000);
+
+      const timerEl = document.getElementById("timer");
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = nextDay - now;
+        if (diff <= 0) {
+          timerEl.innerText = "Your next routine is ready!";
+          return;
+        }
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        timerEl.innerText = `Next routine begins in ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
     document.getElementById("start-btn").addEventListener("click", () => {
       if (!localStorage.getItem("startDate")) {
         localStorage.setItem("startDate", new Date().toISOString());
       }
       const day = getDayIndex();
       showRoutine(day);
+      showTimer();
     });
   </script>
 </body>
