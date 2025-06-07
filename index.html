@@ -41,18 +41,10 @@
       margin-right: 0.5rem;
     }
     .toggle {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      background-color: var(--primary);
-      color: white;
+      font-size: 1.5rem;
+      background: none;
       border: none;
-      border-radius: 5px;
-    }
-    .toggle::after {
-      content: ' ☀️';
-    }
-    [data-theme="dark"] .toggle::after {
-      content: ' 🌙';
+      cursor: pointer;
     }
     .section-title {
       text-align: center;
@@ -71,18 +63,16 @@
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(30px);
       opacity: 0;
-      animation: fadeIn 1s ease forwards;
+      animation: fadeIn 0.8s forwards;
     }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.4s; }
-
     @keyframes fadeIn {
       to {
+        transform: translateY(0);
         opacity: 1;
       }
     }
-
     .card img {
       width: 100%;
       height: 180px;
@@ -91,24 +81,25 @@
     .card-content {
       padding: 1rem;
     }
+    .card-content .link-container {
+      margin-top: 1rem;
+    }
     .card-content a {
       display: inline-block;
-      margin-top: 1rem;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
+      margin-right: 0.5rem;
       padding: 0.5rem 1rem;
-      background: linear-gradient(270deg, blue, green, red);
-      background-size: 600% 600%;
-      animation: colorShift 5s ease infinite;
+      text-decoration: none;
+      color: white;
+      border-radius: 5px;
+      background-color: var(--primary);
+      animation: colorChange 3s infinite;
     }
-
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes colorChange {
+      0% { background-color: blue; }
+      33% { background-color: green; }
+      66% { background-color: red; }
+      100% { background-color: blue; }
     }
-
     .ad-banner {
       width: 100%;
       margin: 2rem auto;
@@ -127,65 +118,45 @@
       <img src="your-logo.png" alt="G-Fit Logo" id="logo">
       <h2>G-Fit</h2>
     </div>
-    <button class="toggle" onclick="toggleTheme()"></button>
+    <button class="toggle" onclick="toggleTheme()" id="themeToggle">☀️</button>
   </header>
 
   <div class="ad-banner">
     <img src="https://via.placeholder.com/720x90?text=Your+Ad+Here" alt="Ad Banner">
   </div>
 
-  <h2 class="section-title">Africans</h2>
   <div class="section">
     <div class="card">
       <img src="https://i.imgur.com/kBq4WbD.jpg" alt="Slim to Muscle">
       <div class="card-content">
         <h3>Slim to Muscle</h3>
-        <p>Workout and meal plans tailored for naturally slim African body types aiming to bulk up smartly.</p>
-        <a href="#">Get Started</a>
+        <p>Workout and meal plans tailored for naturally slim body types aiming to bulk up smartly.</p>
+        <div class="link-container">
+          <a href="#">African</a>
+          <a href="#">Caucasian</a>
+        </div>
       </div>
     </div>
     <div class="card">
       <img src="https://i.imgur.com/U2a2zDL.jpg" alt="Bodied to Muscle">
       <div class="card-content">
         <h3>Bodied to Gain More</h3>
-        <p>Advance routines and African nutrition to take your built body to god-tier strength and size.</p>
-        <a href="#">Get Started</a>
+        <p>Advance routines and nutrition to take your built body to god-tier strength and size.</p>
+        <div class="link-container">
+          <a href="#">African</a>
+          <a href="#">Caucasian</a>
+        </div>
       </div>
     </div>
     <div class="card">
       <img src="https://i.imgur.com/VuQlGUo.jpg" alt="Fat to Fit">
       <div class="card-content">
         <h3>Fat to Fit</h3>
-        <p>Custom weight loss workouts and high-energy food swaps ideal for African metabolism.</p>
-        <a href="#">Get Started</a>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="section-title">Caucasians</h2>
-  <div class="section">
-    <div class="card">
-      <img src="https://i.imgur.com/x9aQG1P.jpg" alt="Slim Caucasian">
-      <div class="card-content">
-        <h3>Slim to Muscle</h3>
-        <p>From skinny to muscular with high-calorie Western meals and gym-free bodyweight routines.</p>
-        <a href="#">Get Started</a>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://i.imgur.com/MaVRs9e.jpg" alt="Bodied Caucasian">
-      <div class="card-content">
-        <h3>Bodied to Gain More</h3>
-        <p>Targeted plans for gym bros looking to push size, symmetry and intensity higher.</p>
-        <a href="#">Get Started</a>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://i.imgur.com/mr4uQi0.jpg" alt="Fat Caucasian">
-      <div class="card-content">
-        <h3>Fat to Fit</h3>
-        <p>Cut weight quickly using effective HIIT routines, portion control and meal prep.</p>
-        <a href="#">Get Started</a>
+        <p>Custom weight loss workouts and high-energy food swaps tailored to your body.</p>
+        <div class="link-container">
+          <a href="#">African</a>
+          <a href="#">Caucasian</a>
+        </div>
       </div>
     </div>
   </div>
@@ -197,9 +168,10 @@
   <script>
     function toggleTheme() {
       const current = document.documentElement.getAttribute("data-theme");
-      document.documentElement.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+      const isDark = current === "dark";
+      document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
+      document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
     }
   </script>
 </body>
-  </html>
-  
+</html>
