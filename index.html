@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G-Fit | Home</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --card-bg: #f0f0f0;
+      --primary: #116530;
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --text: #f0f0f0;
+      --card-bg: #333;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      margin-right: 0.5rem;
+    }
+    .toggle {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .toggle::after {
+      content: ' ☀️';
+    }
+    [data-theme="dark"] .toggle::after {
+      content: ' 🌙';
+    }
+    .section-title {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 2rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content a {
+      display: inline-block;
+      margin-top: 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(270deg, blue, green, red);
+      background-size: 600% 600%;
+      animation: colorShift 5s ease infinite;
+    }
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .ad-banner {
+      width: 100%;
+      margin: 2rem auto;
+      max-width: 720px;
+      text-align: center;
+    }
+    .ad-banner img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="your-logo.png" alt="G-Fit Logo" id="logo">
+      <h2>G-Fit</h2>
+    </div>
+    <button class="toggle" onclick="toggleTheme()"></button>
+  </header>
+
+  <div class="ad-banner">
+    <img src="https://via.placeholder.com/720x90?text=Your+Ad+Here" alt="Ad Banner">
+  </div>
+
+  <h2 class="section-title">Africans</h2>
+  <div class="section">
+    <div class="card">
+      <img src="https://i.imgur.com/kBq4WbD.jpg" alt="Slim to Muscle">
+      <div class="card-content">
+        <h3>Slim to Muscle</h3>
+        <p>Workout and meal plans tailored for naturally slim African body types aiming to bulk up smartly.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/U2a2zDL.jpg" alt="Bodied to Muscle">
+      <div class="card-content">
+        <h3>Bodied to Gain More</h3>
+        <p>Advance routines and African nutrition to take your built body to god-tier strength and size.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/VuQlGUo.jpg" alt="Fat to Fit">
+      <div class="card-content">
+        <h3>Fat to Fit</h3>
+        <p>Custom weight loss workouts and high-energy food swaps ideal for African metabolism.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Caucasians</h2>
+  <div class="section">
+    <div class="card">
+      <img src="https://i.imgur.com/x9aQG1P.jpg" alt="Slim Caucasian">
+      <div class="card-content">
+        <h3>Slim to Muscle</h3>
+        <p>From skinny to muscular with high-calorie Western meals and gym-free bodyweight routines.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/MaVRs9e.jpg" alt="Bodied Caucasian">
+      <div class="card-content">
+        <h3>Bodied to Gain More</h3>
+        <p>Targeted plans for gym bros looking to push size, symmetry and intensity higher.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/mr4uQi0.jpg" alt="Fat Caucasian">
+      <div class="card-content">
+        <h3>Fat to Fit</h3>
+        <p>Cut weight quickly using effective HIIT routines, portion control and meal prep.</p>
+        <a href="#">Get Started</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner">
+    <img src="https://via.placeholder.com/720x90?text=Promote+Your+Brand+Here" alt="Ad Banner 2">
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+</body>
+  </html>
+  
