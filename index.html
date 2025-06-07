@@ -62,17 +62,18 @@
   <div id="routine-display" class="section"></div>
 
   <script>
-    const routines = [
+    const mealTemplate = [
+      "Breakfast: 4 eggs, 2 toasts, oats with banana & peanut butter",
+      "Snack: Greek yogurt + almonds + whey protein",
+      "Lunch: Chicken breast + brown rice + broccoli",
+      "Snack: Tuna sandwich + fruit juice",
+      "Dinner: Grilled salmon + sweet potatoes + spinach",
+      "Night Snack: Casein shake + cottage cheese + apple"
+    ];
+
+    const workouts = [
       {
         title: "Day 1 – Chest & Triceps",
-        meals: [
-          "Breakfast: 4 eggs, 2 toasts, oats with banana & peanut butter",
-          "Snack: Greek yogurt + almonds + whey protein",
-          "Lunch: Chicken breast + brown rice + broccoli",
-          "Snack: Tuna sandwich + fruit juice",
-          "Dinner: Grilled salmon + sweet potatoes + spinach",
-          "Night Snack: Casein shake + cottage cheese + apple"
-        ],
         workout: [
           "Bench Press – 4×8",
           "Incline Dumbbell Press – 3×10",
@@ -84,14 +85,6 @@
       },
       {
         title: "Day 2 – Back & Biceps",
-        meals: [
-          "Breakfast: Omelette, oats & berries",
-          "Snack: Protein shake + banana",
-          "Lunch: Grilled fish + quinoa + green beans",
-          "Snack: Boiled eggs + fruit",
-          "Dinner: Steak + mashed potatoes + kale",
-          "Night Snack: Cottage cheese + handful of nuts"
-        ],
         workout: [
           "Deadlift – 4×6",
           "Pull-ups – 3×Max",
@@ -100,9 +93,68 @@
           "Hammer Curls – 3×12"
         ],
         image: "https://www.bodybuilding.com/images/2020/august/back-workout-for-thickness-header-960x540.jpg"
+      },
+      {
+        title: "Day 3 – Legs & Abs",
+        workout: [
+          "Squats – 4×8",
+          "Romanian Deadlift – 3×10",
+          "Leg Press – 3×12",
+          "Hanging Leg Raises – 3×15",
+          "Planks – 3×60s"
+        ],
+        image: "https://cdn.muscleandstrength.com/sites/default/files/leg-press_1.jpg"
+      },
+      {
+        title: "Day 4 – Shoulders & Core",
+        workout: [
+          "Overhead Press – 4×8",
+          "Lateral Raises – 3×12",
+          "Face Pulls – 3×15",
+          "Russian Twists – 3×20",
+          "Cable Crunches – 3×15"
+        ],
+        image: "https://cdn.muscleandstrength.com/sites/default/files/overhead-barbell-press_1.jpg"
+      },
+      {
+        title: "Day 5 – Full Body Hypertrophy",
+        workout: [
+          "Clean & Press – 3×6",
+          "Pull-ups – 3×Max",
+          "Bulgarian Split Squats – 3×10",
+          "Push-ups – 3×Max",
+          "Barbell Curls – 3×10"
+        ],
+        image: "https://barbend.com/wp-content/uploads/2021/04/shutterstock_1243897240.jpg"
+      },
+      {
+        title: "Day 6 – Arms Focus + HIIT",
+        workout: [
+          "Superset: Skullcrushers + Close-grip Bench – 3 sets",
+          "Superset: Preacher Curl + Incline Curl – 3 sets",
+          "HIIT: 20 mins cycling sprint intervals"
+        ],
+        image: "https://cdn.muscleandstrength.com/sites/default/files/arms-dumbbell-curl.jpg"
+      },
+      {
+        title: "Day 7 – Active Rest",
+        workout: [
+          "Light walking, stretching, or yoga",
+          "Hydrate well & meal focus: high-carb, moderate-protein"
+        ],
+        image: "https://www.yogajournal.com/wp-content/uploads/2021/12/stretching.jpg"
       }
-      // Add more days as needed up to Day 30
     ];
+
+    const routines = [];
+    for (let i = 0; i < 30; i++) {
+      routines.push({
+        title: `Day ${i + 1} – ${workouts[i % 7].title.split(" – ")[1]}`,
+        meals: mealTemplate,
+        workout: workouts[i % 7].workout,
+        image: workouts[i % 7].image
+      });
+    }
 
     function getDayIndex() {
       const storedStart = localStorage.getItem('startDate');
