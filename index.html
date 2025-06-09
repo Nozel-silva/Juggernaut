@@ -1,176 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>G-Fit | Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G-Fit | Fitness Plans</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #000000;
-      --card-bg: #f0f0f0;
-      --primary: #116530;
-    }
-    [data-theme="dark"] {
-      --bg: #1a1a1a;
-      --text: #f0f0f0;
-      --card-bg: #333;
-    }
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', sans-serif;
-      transition: background 0.3s, color 0.3s;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: #111;
+      color: #fff;
       padding: 1rem 2rem;
-      background-color: var(--card-bg);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     .logo {
       display: flex;
       align-items: center;
     }
+
     .logo img {
-      height: 50px;
-      margin-right: 0.5rem;
+      height: 40px;
+      margin-right: 10px;
     }
-    .toggle {
+
+    .logo h1 {
       font-size: 1.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff4500;
+    }
+
+    .hero {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .hero-text h2 {
+      font-size: 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .get-started-btn {
+      margin-top: 2rem;
+      
+      padding: 0.8rem 1.5rem;
+      background: #ff4500;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .get-started-btn:hover {
+      background: #e03e00;
+    }
+
+    .popup-form {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      width: 300px;
+    }
+
+    .popup-content label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .popup-content select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .popup-content .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
       background: none;
       border: none;
+      font-size: 1.2rem;
       cursor: pointer;
+      color: #888;
     }
-    .section-title {
-      text-align: center;
-      margin: 2rem 0 1rem;
-      font-size: 2rem;
-      color: var(--primary);
+
+    .popup-content a {
+      display: block;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      color: #007bff;
     }
+
+    .content {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
     .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 1rem 2rem;
+      gap: 2rem;
+      margin-top: 2rem;
     }
-    .card {
-      background: var(--card-bg);
+
+    .plan {
+      background: #fff;
+      padding: 1.5rem;
       border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(30px);
-      opacity: 0;
-      animation: fadeIn 0.8s forwards;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    @keyframes fadeIn {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+
+    .plan h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #222;
     }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
+
+    .plan ul {
+      list-style: none;
     }
-    .card-content {
-      padding: 1rem;
+
+    .plan ul li {
+      padding: 0.5rem 0;
     }
-    .card-content .link-container {
-      margin-top: 1rem;
-    }
-    .card-content a {
-      display: inline-block;
-      margin-right: 0.5rem;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      color: white;
-      border-radius: 5px;
-      background-color: var(--primary);
-      animation: colorChange 3s infinite;
-    }
-    @keyframes colorChange {
-      0% { background-color: blue; }
-      33% { background-color: green; }
-      66% { background-color: red; }
-      100% { background-color: blue; }
-    }
-    .ad-banner {
-      width: 100%;
-      margin: 2rem auto;
-      max-width: 720px;
+
+    footer {
+      background: #111;
+      color: #fff;
       text-align: center;
-    }
-    .ad-banner img {
-      width: 100%;
-      border-radius: 10px;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="your-logo.png" alt="G-Fit Logo" id="logo">
-      <h2>G-Fit</h2>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2048px-React-icon.svg.png" alt="Logo">
+      <h1>G-Fit</h1>
     </div>
-    <button class="toggle" onclick="toggleTheme()" id="themeToggle">☀️</button>
+    <nav>
+    
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <div class="ad-banner">
-    <img src="https://via.placeholder.com/720x90?text=Your+Ad+Here" alt="Ad Banner">
-  </div>
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+    </video>
+    <div class="hero-text">
+      <h2>Transform Your Body. Unlock Your Potential.</h2>
+      
+    </div>
+  </section>
 
-  <div class="section">
-    <div class="card">
-      <img src="https://i.imgur.com/kBq4WbD.jpg" alt="Slim to Muscle">
-      <div class="card-content">
-        <h3>Slim to Muscle</h3>
-        <p>Workout and meal plans tailored for naturally slim body types aiming to bulk up smartly.</p>
-        <div class="link-container">
-          <a href="#">African</a>
-          <a href="#">Caucasian</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://i.imgur.com/U2a2zDL.jpg" alt="Bodied to Muscle">
-      <div class="card-content">
-        <h3>Bodied to Gain More</h3>
-        <p>Advance routines and nutrition to take your built body to god-tier strength and size.</p>
-        <div class="link-container">
-          <a href="#">African</a>
-          <a href="#">Caucasian</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://i.imgur.com/VuQlGUo.jpg" alt="Fat to Fit">
-      <div class="card-content">
-        <h3>Fat to Fit</h3>
-        <p>Custom weight loss workouts and high-energy food swaps tailored to your body.</p>
-        <div class="link-container">
-          <a href="#">African</a>
-          <a href="#">Caucasian</a>
-        </div>
-      </div>
+  <div id="popupForm" class="popup-form">
+    <div class="popup-content">
+      <button class="close-btn" onclick="document.getElementById('popupForm').style.display='none'">&times;</button>
+      <label for="format">Choose Format</label>
+      <select id="format" onchange="handleSelection(this.value)">
+        <option value="">-- Select --</option>
+        <option value="https://yourlink.com/caucasian">Caucasian</option>
+        <option value="https://yourlink.com/african">African</option>
+      </select>
     </div>
   </div>
 
-  <div class="ad-banner">
-    <img src="https://via.placeholder.com/720x90?text=Promote+Your+Brand+Here" alt="Ad Banner 2">
-  </div>
+  <section class="content" id="plans">
+    <div class="section">
+      <h3>Choose Your Plan</h3>
+      <p>Explore our professionally designed fitness programs tailored for African and Caucasian body types.</p>
+      <div class="plans">
+        <div class="plan">
+          <h4>Muscle Gain</h4>
+          <ul>
+            <li>High-protein meal plans</li>
+            <li>Progressive weight training</li>
+            <li>Recovery and sleep tracking</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <h4>Fat Loss</h4>
+          <ul>
+            <li>Calorie deficit meal plans</li>
+            <li>HIIT & cardio routines</li>
+            <li>Weekly weight checks</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <h4>Custom Fit</h4>
+          <ul>
+            <li>Tailored workouts</li>
+            <li>Body-type specific diets</li>
+            <li>Ongoing virtual support</li>
+          </ul>
+        </div>
+      </div>
+       <button class="get-started-btn" onclick="document.getElementById('popupForm').style.display='flex'">Get Started</button>
+    </div>
+
+ 
+    <div class="section" id="about">
+      <h3>About G-Fit</h3>
+      <p>G-Fit is powered by Leading Edge’s unique body-type algorithms, offering precision fitness guidance for better, faster results.</p>
+      
+     
+    </div>
+
+    <div class="section" id="contact">
+      <h3>Contact Us</h3>
+      <p>Email: support@g-fit.com | Twitter: @GFitOfficial</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 G-Fit. All rights reserved.
+  </footer>
 
   <script>
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute("data-theme");
-      const isDark = current === "dark";
-      document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
-      document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
+    function handleSelection(value) {
+      if (value) window.location.href = value;
     }
   </script>
 </body>
