@@ -58,15 +58,35 @@
     .banner {
       text-align: center;
       font-size: 1.2rem;
-      margin: 2rem 0;
-      color: #c0392b;
-      font-weight: bold;
+      margin: 2rem auto;
+      color: #116530;
+      background-color: #eafaf1;
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .banner button {
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background-color: #116530;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <h1>30-Day Nigerian Workout Plan</h1>
-  <div class="banner">Purchase the appropriate meals to make your efforts worthwhile.</div>
+  <div class="banner">
+    Want faster results? <br>
+    <strong>Purchase the full 30-day Nigerian Muscle Gain Meal Plan</strong><br>
+    <a href="https://yourwebsite.com/muscle-meal-plan" target="_blank">
+      <button>Get the Meal Plan</button>
+    </a>
+  </div>
   <button id="start-btn">Start Daily Routine</button>
   <div id="routine-display" class="section"></div>
   <div id="timer"></div>
