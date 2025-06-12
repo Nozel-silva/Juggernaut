@@ -1,1 +1,144 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7-Day African Workout Routine</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .start-button {
+      width: 50vh;
+      height: 50vh;
+      border-radius: 50%;
+      background-color: #28a745;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .start-button:hover {
+      background-color: #218838;
+    }
+    .routine {
+      display: none;
+      margin-top: 2rem;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .day-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="start-button" onclick="showRoutine()">Let's Go</div>
+    <div id="routine" class="routine">
+      <div class="day-title" id="dayTitle"></div>
+      <ul id="routineList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const workouts = {
+      1: [
+        "Warm-up: Light arm swings - 3 mins",
+        "Step-ups on stairs - 15 reps",
+        "Wall push-ups - 10 reps",
+        "Standing side leg lifts - 12 per leg",
+        "Cool down: Stretch legs and arms - 5 mins"
+      ],
+      2: [
+        "Warm-up: Walk around compound - 5 mins",
+        "Bodyweight squats - 15 reps",
+        "Hip thrusts - 15 reps",
+        "Toe touches - 30 sec",
+        "Stretch and deep breathing"
+      ],
+      3: [
+        "Warm-up: Light march - 3 mins",
+        "Modified push-ups - 12 reps",
+        "Leg raises - 10 per leg",
+        "Side stretches - 30 sec per side",
+        "Cool down: 5 mins breathing"
+      ],
+      4: [
+        "Warm-up: Deep breathing + slow walk",
+        "Standing toe taps - 30 sec",
+        "Wall sits - 30 sec",
+        "Step-ups - 10 reps",
+        "Stretch arms and back"
+      ],
+      5: [
+        "Warm-up: Arm circles and walking - 4 mins",
+        "Glute bridges - 20 reps",
+        "Bodyweight lunges - 10 per leg",
+        "Wall push-ups - 10 reps",
+        "Stretch for 5 mins"
+      ],
+      6: [
+        "Warm-up: 2 mins jumping jacks",
+        "Squats - 15 reps",
+        "Standing side kicks - 12 each side",
+        "Stretch hamstrings and arms",
+        "Cooldown: Slow breathing"
+      ],
+      7: [
+        "Warm-up: Gentle yoga-style stretch",
+        "March in place - 2 mins",
+        "Hip thrusts - 15 reps",
+        "Arm swings - 2 mins",
+        "Relax and deep stretch"
+      ]
+    };
+
+    let currentDay = 1;
+
+    function showRoutine() {
+      if (currentDay > 7) {
+        alert("You’ve completed all 7 days! Great job.");
+        return;
+      }
+      const dayTitle = document.getElementById("dayTitle");
+      const routineList = document.getElementById("routineList");
+      const routineDiv = document.getElementById("routine");
+
+      dayTitle.textContent = `Day ${currentDay} Workout Routine`;
+      routineList.innerHTML = "";
+
+      workouts[currentDay].forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        routineList.appendChild(li);
+      });
+
+      routineDiv.style.display = "block";
+      currentDay++;
+    }
+  </script>
+</body>
+</html>
