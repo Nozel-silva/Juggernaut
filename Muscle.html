@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>30-Day Nigerian Muscle Gain Plan</title>
+  <title>30-Day Global Muscle Gain Plan</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -11,9 +11,8 @@
       color: #222;
       line-height: 1.6;
       padding: 2rem;
-      margin: 0;
     }
-    h1, h2, h3 {
+    h1, h2 {
       text-align: center;
       color: #116530;
     }
@@ -22,7 +21,7 @@
       margin: 2rem auto;
       padding: 1.5rem;
       border-radius: 12px;
-      max-width: 850px;
+      max-width: 800px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     img {
@@ -38,7 +37,7 @@
     }
     #start-btn {
       display: block;
-      margin: 2rem auto 1rem;
+      margin: 2rem auto;
       padding: 1rem 2rem;
       font-size: 1.1rem;
       background-color: #116530;
@@ -64,76 +63,50 @@
       background-color: #eafaf1;
       padding: 1rem;
       border-radius: 10px;
-      max-width: 700px;
+      max-width: 600px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      position: relative;
     }
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
+    .meal-selector {
       display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 200px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      border-radius: 8px;
-      overflow: hidden;
-      z-index: 1;
+      margin-top: 1rem;
     }
-    .dropdown-content a {
-      color: #116530;
-      padding: 12px 16px;
-      text-decoration: none;
+    .meal-selector a {
       display: block;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    .dropdown-content a:hover {
-      background-color: #eafaf1;
-    }
-    .dropdown button {
+      margin: 0.5rem auto;
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
       background-color: #116530;
       color: white;
       border: none;
       border-radius: 6px;
-      cursor: pointer;
+      text-decoration: none;
+      max-width: 200px;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .info-text {
+    .science {
       max-width: 800px;
-      margin: 1rem auto 2rem;
-      padding: 1rem;
-      background: #f0fdf4;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #f4fef8;
       border-left: 5px solid #116530;
-      border-radius: 8px;
-      color: #2c3e50;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>30-Day Nigerian Muscle Gain Workout Plan</h1>
+  <h1>30-Day Global Home Workout Challenge</h1>
 
-  <div class="info-text">
-    <p><strong>Welcome to your 30-day transformation challenge!</strong> This plan is crafted for Nigerian environments using bodyweight exercises that improve hypertrophy, endurance, and mobility. Scientific studies suggest compound movements like squats and push-ups stimulate multiple muscle groups and promote natural testosterone production — crucial for building lean mass.</p>
-    <p>The weekly structure targets different muscle groups, ensuring recovery and growth while promoting fat loss. Pairing it with the right diet accelerates muscle gains significantly.</p>
+  <div class="science">
+    <h2>Why This Plan Works</h2>
+    <p>This plan combines foundational calisthenics and dynamic compound movements proven to stimulate muscle growth, improve cardiovascular health, and enhance mobility. Studies show that consistent bodyweight training increases testosterone, supports lean muscle gain, and burns fat effectively—especially when paired with balanced, protein-rich nutrition. Each rest day is optimized for recovery to promote hypertrophy and prevent overtraining.</p>
   </div>
 
   <div class="banner">
     Want faster results? <br>
-    <strong>Choose a Meal Plan Designed for Your Body Type:</strong><br>
-    <div class="dropdown">
-      <button>Select Meal Plan</button>
-      <div class="dropdown-content">
-        <a href="https://yourwebsite.com/muscle-meal-plan-african" target="_blank">African Genetic Meal Plan</a>
-        <a href="https://yourwebsite.com/muscle-meal-plan-caucasian" target="_blank">Caucasian Genetic Meal Plan</a>
-      </div>
+    <strong>Select a 30-Day Muscle Gain Meal Plan</strong><br>
+    <button onclick="toggleMealOptions()">Choose Your Meal Plan</button>
+    <div id="meal-options" class="meal-selector">
+      <a href="https://yourwebsite.com/african-meal-plan" target="_blank">African Meal Plan</a>
+      <a href="https://yourwebsite.com/western-meal-plan" target="_blank">Western Meal Plan</a>
     </div>
   </div>
 
@@ -142,6 +115,11 @@
   <div id="timer"></div>
 
   <script>
+    function toggleMealOptions() {
+      const options = document.getElementById("meal-options");
+      options.style.display = options.style.display === "block" ? "none" : "block";
+    }
+
     const workouts = [
       {
         title: "Day 1 – Chest & Triceps",
@@ -216,6 +194,7 @@
       if (!storedStart) return;
       const startDate = new Date(storedStart);
       const nextDay = new Date(startDate.getTime() + (getDayIndex() + 1) * 24 * 60 * 60 * 1000);
+
       const timerEl = document.getElementById("timer");
 
       function updateCountdown() {
