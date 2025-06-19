@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muscle Gain routine</title>
+  <title>Muscle Gain Routine</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -12,9 +12,21 @@
       line-height: 1.6;
       padding: 2rem;
     }
-    h1, h2 {
+    h1, h2, h3 {
       text-align: center;
       color: #116530;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    nav a {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background-color: #4b5563;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
     }
     .section {
       background: #fff;
@@ -68,19 +80,37 @@
     }
     .meal-selector {
       display: none;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
     }
-    .meal-selector a {
-      display: block;
-      margin: 0.5rem auto;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      background-color: #116530;
+    .meal-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      text-align: center;
+      width: 240px;
+    }
+    .meal-card h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      color: #116530;
+    }
+    .meal-card p {
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    .meal-card a {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #10b981;
       color: white;
-      border: none;
-      border-radius: 6px;
       text-decoration: none;
-      max-width: 200px;
+      border-radius: 6px;
+      font-weight: bold;
     }
     .science {
       max-width: 800px;
@@ -93,32 +123,44 @@
   </style>
 </head>
 <body>
-  <h1>7-Day Home Workout routine </h1>
+  <h1>7-Day Home Workout Routine</h1>
+
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
 
   <div class="banner">
-    Want faster results? <br>
+    Want faster results?<br>
     <strong>Select a 30-Day Muscle Gain Meal Plan</strong><br>
     <button onclick="toggleMealOptions()">Choose Your Meal Plan</button>
     <div id="meal-options" class="meal-selector">
-      <a href=" https://paystack.shop/pay/mafr" target="_blank">African Meal Plan<i>15,000</i></a>
-      <a href="https://paystack.shop/pay/cauc" target="_blank">Western Meal Plan<i>$10</i></a>
+      <div class="meal-card">
+        <h4>African Meal Plan</h4>
+        <p>₦15,000</p>
+        <a href="https://paystack.shop/pay/mafr" target="_blank">Get Plan</a>
+      </div>
+      <div class="meal-card">
+        <h4>Western Meal Plan</h4>
+        <p>$10</p>
+        <a href="https://paystack.shop/pay/cauc" target="_blank">Get Plan</a>
+      </div>
     </div>
   </div>
 
-
   <button id="start-btn">Start Daily Routine</button>
   <div id="routine-display" class="section"></div>
- <div class="science">
+
+  <div class="science">
     <h2>Why This Plan Works</h2>
     <p>This plan combines foundational calisthenics and dynamic compound movements proven to stimulate muscle growth, improve cardiovascular health, and enhance mobility. Studies show that consistent bodyweight training increases testosterone, supports lean muscle gain, and burns fat effectively—especially when paired with balanced, protein-rich nutrition. Each rest day is optimized for recovery to promote hypertrophy and prevent overtraining.</p>
- </div>
-  
+  </div>
+
   <div id="timer"></div>
-  
+
   <script>
     function toggleMealOptions() {
       const options = document.getElementById("meal-options");
-      options.style.display = options.style.display === "block" ? "none" : "block";
+      options.style.display = options.style.display === "flex" ? "none" : "flex";
     }
 
     const workouts = [
