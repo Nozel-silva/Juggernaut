@@ -1,192 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>30-Day Muscle Gain Plan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G-Fit | Tailored Weight Loss Plans</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6f9fc;
+      color: #222;
       line-height: 1.6;
-      padding: 2rem;
     }
-    h1, h2 {
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 2rem 1rem;
       text-align: center;
-      color: #1e3a8a;
     }
-    .section {
-      background: white;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      max-width: 800px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
     }
-    img {
-      width: 100%;
-      border-radius: 10px;
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+    nav {
+      text-align: center;
       margin: 1rem 0;
     }
-    ul {
-      padding-left: 1.2rem;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    .day-title {
-      color: #2563eb;
-      font-weight: bold;
+    nav a {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background-color: #4b5563;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
       margin-top: 1rem;
     }
-    #start-btn {
-      display: block;
+    section {
+      max-width: 900px;
       margin: 2rem auto;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 0 1rem;
     }
-    #routine-display {
-      display: none;
+    section h2 {
+      color: #1f2937;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #059669;
+    }
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 2rem;
+    }
+    .plan {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      width: 280px;
+      margin: 1rem;
+      text-align: center;
+    }
+    .plan h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .plan p {
+      font-size: 1rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .plan a {
+      display: inline-block;
+      padding: 0.75rem 1.2rem;
+      background-color: #10b981;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      background: #e5e7eb;
     }
   </style>
 </head>
 <body>
-  <h1>30-Day Muscle Gain Meal & Workout Plan</h1>
-  <button id="start-btn">Start Daily Routine</button>
-  <div id="routine-display" class="section"></div>
+  <header>
+    <h1>G-Fit: Region-Based Weight Loss Made Smart</h1>
+    <p>Powered by L.E.V.I</p>
+  </header>
 
-  <script>
-    const mealTemplate = [
-      "Breakfast: 4 eggs, 2 toasts, oats with banana & peanut butter",
-      "Snack: Greek yogurt + almonds + whey protein",
-      "Lunch: Chicken breast + brown rice + broccoli",
-      "Snack: Tuna sandwich + fruit juice",
-      "Dinner: Grilled salmon + sweet potatoes + spinach",
-      "Night Snack: Casein shake + cottage cheese + apple"
-    ];
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
 
-    const workouts = [
-      {
-        title: "Day 1 – Chest & Triceps",
-        workout: [
-          "Bench Press – 4×8",
-          "Incline Dumbbell Press – 3×10",
-          "Cable Fly – 3×12",
-          "Tricep Pushdown – 3×10",
-          "Dips – 2×Max"
-        ],
-        image: "https://www.muscleandstrength.com/sites/default/files/bench-press.jpg"
-      },
-      {
-        title: "Day 2 – Back & Biceps",
-        workout: [
-          "Deadlift – 4×6",
-          "Pull-ups – 3×Max",
-          "Barbell Rows – 4×8",
-          "Dumbbell Curls – 3×10",
-          "Hammer Curls – 3×12"
-        ],
-        image: "https://www.bodybuilding.com/images/2020/august/back-workout-for-thickness-header-960x540.jpg"
-      },
-      {
-        title: "Day 3 – Legs & Abs",
-        workout: [
-          "Squats – 4×8",
-          "Romanian Deadlift – 3×10",
-          "Leg Press – 3×12",
-          "Hanging Leg Raises – 3×15",
-          "Planks – 3×60s"
-        ],
-        image: "https://cdn.muscleandstrength.com/sites/default/files/leg-press_1.jpg"
-      },
-      {
-        title: "Day 4 – Shoulders & Core",
-        workout: [
-          "Overhead Press – 4×8",
-          "Lateral Raises – 3×12",
-          "Face Pulls – 3×15",
-          "Russian Twists – 3×20",
-          "Cable Crunches – 3×15"
-        ],
-        image: "https://cdn.muscleandstrength.com/sites/default/files/overhead-barbell-press_1.jpg"
-      },
-      {
-        title: "Day 5 – Full Body Hypertrophy",
-        workout: [
-          "Clean & Press – 3×6",
-          "Pull-ups – 3×Max",
-          "Bulgarian Split Squats – 3×10",
-          "Push-ups – 3×Max",
-          "Barbell Curls – 3×10"
-        ],
-        image: "https://barbend.com/wp-content/uploads/2021/04/shutterstock_1243897240.jpg"
-      },
-      {
-        title: "Day 6 – Arms Focus + HIIT",
-        workout: [
-          "Superset: Skullcrushers + Close-grip Bench – 3 sets",
-          "Superset: Preacher Curl + Incline Curl – 3 sets",
-          "HIIT: 20 mins cycling sprint intervals"
-        ],
-        image: "https://cdn.muscleandstrength.com/sites/default/files/arms-dumbbell-curl.jpg"
-      },
-      {
-        title: "Day 7 – Active Rest",
-        workout: [
-          "Light walking, stretching, or yoga",
-          "Hydrate well & meal focus: high-carb, moderate-protein"
-        ],
-        image: "https://www.yogajournal.com/wp-content/uploads/2021/12/stretching.jpg"
-      }
-    ];
+  <section>
+    <h2>Why G-Fit?</h2>
+    <p>
+      Weight loss isn't one-size-fits-all. Your <span class="highlight">meals and culture-specific diets</span> play a huge role in your body transformation journey. G-Fit is a cutting-edge algorithm that intelligently tailors weight loss meal plans based on your region — with special focus on <span class="highlight">African</span> and <span class="highlight">Western</span> dietary needs.
+    </p>
+    <p>
+      Whether you're enjoying jollof rice and egusi soup, or lean chicken and greens, G-Fit ensures your plan is optimized for <span class="highlight">real fat loss</span> and <span class="highlight">nutritional balance</span> — not starvation.
+    </p>
 
-    const routines = [];
-    for (let i = 0; i < 30; i++) {
-      routines.push({
-        title: `Day ${i + 1} – ${workouts[i % 7].title.split(" – ")[1]}`,
-        meals: mealTemplate,
-        workout: workouts[i % 7].workout,
-        image: workouts[i % 7].image
-      });
-    }
+    <div class="plans">
+      <div class="plan">
+        <h3>African Meal Plan</h3>
+        <p>Custom meals for African users</p>
+        <p><strong>₦15,000</strong></p>
+        <a href="https://paystack.shop/pay/afr" target="_blank">Download Plan</a>
+      </div>
+      <div class="plan">
+        <h3>Western Meal Plan</h3>
+        <p>Tailored for Western lifestyles</p>
+        <p><strong>$10.99</strong></p>
+        <a href="https://paystack.shop/pay/g-fitness" target="_blank">Download Plan</a>
+      </div>
+    </div>
+  </section>
 
-    function getDayIndex() {
-      const storedStart = localStorage.getItem('startDate');
-      const today = new Date();
-      if (!storedStart) return 0;
-      const startDate = new Date(storedStart);
-      const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-      return Math.min(diff, routines.length - 1);
-    }
-
-    function showRoutine(day) {
-      const routine = routines[day];
-      if (!routine) return;
-      const display = document.getElementById("routine-display");
-      display.innerHTML = `
-        <h2>${routine.title}</h2>
-        <h3>Meals:</h3>
-        <ul>${routine.meals.map(m => `<li>${m}</li>`).join('')}</ul>
-        <h3>Workout:</h3>
-        <ul>${routine.workout.map(w => `<li>${w}</li>`).join('')}</ul>
-        <img src="${routine.image}" alt="Workout image">
-      `;
-      display.style.display = 'block';
-    }
-
-    document.getElementById("start-btn").addEventListener("click", () => {
-      if (!localStorage.getItem("startDate")) {
-        localStorage.setItem("startDate", new Date().toISOString());
-      }
-      const day = getDayIndex();
-      showRoutine(day);
-    });
-  </script>
+  <footer>
+    &copy; 2025 G-Fit. Built with purpose. Powered by L.E.V.I.
+  </footer>
 </body>
 </html>
